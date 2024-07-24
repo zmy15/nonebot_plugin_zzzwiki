@@ -100,6 +100,6 @@ async def handle_send_pokedex_image(bot: Bot, event: Event):
 async def send_image(bot: Bot, event: Event, category: str, name: str):
     if name in path_data[category]:
         image_path = path_data[category][name].lstrip('/')
-        full_image_path = os.path.join(os.getcwd(), image_path).replace('/', '\\')
+        full_image_path = os.path.join(Path(__file__).parent, image_path).replace('/', '\\')
         if os.path.exists(full_image_path):
             await bot.send(event, MessageSegment.image(f"file:///{full_image_path}"))
