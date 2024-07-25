@@ -11,16 +11,12 @@ _✨ 基于nonebot2的绝区零Wiki ✨_
 pip install -r requirements.txt
 ```
 
-3、clone花佬的绝区零图鉴到项目目录下
-```shell
-git clone https://github.com/Nwflower/zzz-atlas.git --depth=1
-```
-
 ## 使用教程
 发送`xx攻略/图鉴`即可
+发送`更新/下载zzz资源`即可更新/下载资源
 
 ## TODO
- - [ ] 自动下载更新资源
+ - [X] 自动下载更新资源
 
 ## 特别感谢
 [zzz-atlas](https://github.com/Nwflower/zzz-atlas)
