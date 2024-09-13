@@ -26,7 +26,7 @@ def load_path():
     file_path = os.path.join(resources_path, file_name)
     if not os.path.exists(file_path):
         try:
-            git_pull(resources_path)
+            git_pull()
         except:
             git_clone(repo_url, resources_path)
     # 读取 path.json 文件
@@ -51,23 +51,23 @@ aliases_path_audio = load_path()['othername']['音擎']
 aliases_audio = load_aliases(aliases_path_audio.lstrip('/'))
 
 
-# aliases_path_record = path_data['othername']['驱动盘']
+# aliases_path_record = load_path()['othername']['驱动盘']
 # aliases_record = load_aliases(aliases_path_audio.lstrip('/'))
 
 @download_resources.handle()
 async def handle_download_resources(bot: Bot, event: Event):
-    if git_clone(repo_url, resources_path):
+    if await git_clone(repo_url, resources_path):
         await bot.send(event, "资源下载成功")
     else:
-        await bot.send(event, "资源下载失败")
+        await bot.send(event, "资源下载失败，可能是网络问题")
 
 
 @update_resources.handle()
 async def handle_update_resources(bot: Bot, event: Event):
-    if git_pull(resources_path):
+    if await git_pull():
         await bot.send(event, "资源更新成功")
     else:
-        await bot.send(event, "资源更新失败")
+        await bot.send(event, "资源更新失败，可能是网络问题")
 
 
 @guide_image.handle()
@@ -125,7 +125,7 @@ async def handle_send_pokedex_image(bot: Bot, event: Event):
                 await send_image(bot, event, "角色", name)
             elif name in load_path()['音擎']:
                 await send_image(bot, event, "音擎", name)
-            # elif name in path_data['驱动盘']:
+            # elif name in load_path()['驱动盘']:
             #     await send_image(bot, event, "驱动盘", name)
 
 
