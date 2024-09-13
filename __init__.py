@@ -19,6 +19,7 @@ config = Config.parse_obj(global_config.dict())
 
 repo_url = 'https://github.com/Nwflower/zzz-atlas.git'
 resources_path = config.resources_path
+git_path = resources_path.removesuffix('/zzzwiki')
 
 
 def load_path():
@@ -28,7 +29,7 @@ def load_path():
         try:
             git_pull()
         except:
-            git_clone(repo_url, resources_path)
+            git_clone(repo_url, git_path)
     # 读取 path.json 文件
     with open(file_path, 'r', encoding='utf-8') as f:
         path_data = json.load(f)
