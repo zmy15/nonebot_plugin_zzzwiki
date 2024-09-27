@@ -11,7 +11,7 @@ resources_path = config.resources_path
 
 
 @run_sync
-def git_clone(repo_url, clone_to_path):
+def git_clone(repo_url, clone_to_path) -> bool:
     repo = git.Repo.clone_from(repo_url, clone_to_path, multi_options=['--depth=1'])
     if repo:
         return True
@@ -20,7 +20,7 @@ def git_clone(repo_url, clone_to_path):
 
 
 @run_sync
-def git_pull():
+def git_pull() -> bool:
     try:
         repo = git.Repo(resources_path)
     except InvalidGitRepositoryError:
@@ -32,3 +32,4 @@ def git_pull():
     except GitCommandError as e:
         if 'timeout' in e.stderr or 'unable to access' in e.stderr:
             return False
+        return False
